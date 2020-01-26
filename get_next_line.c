@@ -6,7 +6,11 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/01/26 19:57:41 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/01/26 20:04:50 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+int get_next_line(int fd, char **line)
+{
+	
+}
