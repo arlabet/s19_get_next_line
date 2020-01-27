@@ -6,7 +6,7 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/01/27 15:06:50 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/01/27 16:10:37 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int get_next_line(int fd)
 	if (!(str = malloc(sizeof(char) * BUFFER_SIZE + 1)))
 		return (0);
 	read(fd, str, BUFFER_SIZE);
-	printf("%s", str);
+	//printf("%s", str);
 	return (1);
 }
 
