@@ -22,9 +22,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 
-size_t	ft_strlen(const char *s);
 char		*ft_strcpy(char *dest, char *src);
-char		*ft_strcat(char *dest, char *src);
 char			*ft_strjoin(char *s1, char *s2);
 
 
