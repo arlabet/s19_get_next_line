@@ -6,60 +6,34 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/01/29 17:19:19 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:38:54 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		n_in_string(char *str)
-{
-	size_t i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\n')
-			return (0);
-	}
-	return (1);
-}
-
-char	*read_charac(int fd)
-{
-	char *charac;
-
-	if (!(charac = malloc(sizeof(char) * 2)))
-		return (NULL);
-	read(fd, charac, 1);
-	printf("%s", charac);
-	return (charac);
-}
-
-int		get_next_line(int fd, char **line)
+size_t	index_n(int fd)
 {
 	char	*charac;
 	size_t	i;
 
-	charac = read_charac(fd);
-	if (!(*line = malloc(sizeof(char) * BUFFER_SIZE + 1)))
-		return (-1);
 	i = 0;
-	if (n_in_string(charac))
+	if (!(charac = malloc(sizeof(char) * 2)))
+		return (0);
+	while (charac[0] != '\n')
 	{
-		while (charac[i])
-		{
-			
-		}
+		read(fd, charac, 1);
+		printf("%c", charac[0]);
+		i++;
 	}
-	printf("%s", *line);
-	return (1);
+	printf("%lu", i);
+	return (i);
 }
 
-int		main(void)
+int	main(void)
 {
 	int		fd;
 
 	fd = open("numbers.dict", O_RDONLY);
-	read_charac(fd);
+	index_n(fd);
 }
