@@ -6,7 +6,15 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:57:35 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/01/27 14:06:00 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/01/29 16:50:27 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
+int	n_in_string(char c)
+{
+	if (c != '\n')
+		return (1);
+	return (0);
+}

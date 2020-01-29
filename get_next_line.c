@@ -1,37 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_old.c                                :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/01/29 14:11:58 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/01/29 16:51:41 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
 
-int	get_next_line(int fd, char **line)
+int	n_indice(char *charac)
 {
-	if (!(*line = malloc(sizeof(char) * BUFFER_SIZE + 1)))
+	size_t i;
+
+	i = 0;
+	while (n_in_string(charac[i]))
+		i++;
+	return (i);
+}
+
+int	read_charac(int fd)
+{
+	char *charac;
+
+	if (!(charac = malloc(sizeof(char) * 2)))
 		return (0);
-	read(fd, *line, BUFFER_SIZE);
+	read(fd, charac, 1);
+	printf("%s", charac);
 	return (1);
 }
 
 int	main(void)
 {
 	int		fd;
-	char	*line[80];
 
 	fd = open("numbers.dict", O_RDONLY);
-	get_next_line(fd, line);
-	printf("%s", *line);
+	read_charac(fd);
 }
