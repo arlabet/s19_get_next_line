@@ -6,34 +6,42 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/01/29 17:38:54 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/01/29 18:22:38 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	index_n(int fd)
+size_t	size_one_line(int fd)
 {
-	char	*charac;
-	size_t	i;
+	size_t	index_n;
+	char	*one_line;
 
-	i = 0;
-	if (!(charac = malloc(sizeof(char) * 2)))
+	index_n = 0;
+	if (!(one_line = malloc(sizeof(char) * 2)))
 		return (0);
-	while (charac[0] != '\n')
+	while (one_line[0] != '\n')
 	{
-		read(fd, charac, 1);
-		printf("%c", charac[0]);
-		i++;
+		read(fd, one_line, 1);
+		index_n++;
 	}
-	printf("%lu", i);
-	return (i);
+	return (index_n);
 }
 
-int	main(void)
+char	*cpy_one_line(int fd)
+{
+	size_t index_n;
+
+	index_n = size_one_line(fd);
+}
+
+int		main(void)
 {
 	int		fd;
 
 	fd = open("numbers.dict", O_RDONLY);
-	index_n(fd);
+	size_one_line(fd);
+	size_one_line(fd);
+	size_one_line(fd);
+	return (0);
 }
