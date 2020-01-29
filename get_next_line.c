@@ -6,42 +6,37 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/01/29 18:22:38 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/01/29 20:01:41 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	size_one_line(int fd)
+char	*get_next_line(char *str, int fd)
 {
-	size_t	index_n;
-	char	*one_line;
+	char		*buff;
+	static int i;
 
-	index_n = 0;
-	if (!(one_line = malloc(sizeof(char) * 2)))
+	if(!(buff = malloc(sizeof(char) * 2)))
 		return (0);
-	while (one_line[0] != '\n')
+	while (buff[0] != '\n' && i < BUFFER_SIZE)
 	{
-		read(fd, one_line, 1);
-		index_n++;
+		read(fd, buff, 1);
+		str = ft_strjoin(str, buff);
+		i++;
 	}
-	return (index_n);
-}
-
-char	*cpy_one_line(int fd)
-{
-	size_t index_n;
-
-	index_n = size_one_line(fd);
+	printf("%s", str);
+	return (str);
 }
 
 int		main(void)
 {
 	int		fd;
-
-	fd = open("numbers.dict", O_RDONLY);
-	size_one_line(fd);
-	size_one_line(fd);
-	size_one_line(fd);
+	char line[1000];
+	
+	fd = open("poeme.txt", O_RDONLY);
+	get_next_line(line, fd);
+	get_next_line(line, fd);
+	get_next_line(line, fd);
 	return (0);
 }
