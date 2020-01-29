@@ -15,13 +15,15 @@
 char	*get_next_line(char *str, int fd)
 {
 	char		*buff;
+	int ret;
 	static int i;
 
+	ret = 1;
 	if(!(buff = malloc(sizeof(char) * 2)))
 		return (0);
-	while (buff[0] != '\n' && i < BUFFER_SIZE)
+	while (buff[0] != '\n' && i < BUFFER_SIZE && (ret > 0))
 	{
-		read(fd, buff, 1);
+		ret = read(fd, buff, 1);
 		str = ft_strjoin(str, buff);
 		i++;
 	}
@@ -33,10 +35,12 @@ int		main(void)
 {
 	int		fd;
 	char line[1000];
-	
+	int i;
+
+	i = 0;
 	fd = open("poeme.txt", O_RDONLY);
-	get_next_line(line, fd);
-	get_next_line(line, fd);
-	get_next_line(line, fd);
+	while (i++ < 100000)
+		get_next_line(line, fd);
+	
 	return (0);
 }
