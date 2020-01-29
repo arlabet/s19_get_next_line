@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-char	*get_next_line(char *str, int fd)
+char	*read_line(char *str, int fd)
 {
 	char		*buff;
 	int ret;
@@ -27,20 +27,32 @@ char	*get_next_line(char *str, int fd)
 		str = ft_strjoin(str, buff);
 		i++;
 	}
-	printf("%s", str);
 	return (str);
+}
+
+int get_next_line(int fd, char **line)
+{
+	char *str;
+	if(!(str = malloc(sizeof(char) * BUFFER_SIZE + 1)))
+		return (0);
+	if(!(*line = malloc(sizeof(char) * BUFFER_SIZE + 1)))
+		return (0);
+	str = read_line(str, fd);
+	ft_strcpy(*line, str);
+	printf("%s", *line);
+	return (1);
 }
 
 int		main(void)
 {
 	int		fd;
-	char line[1000];
+	char *line[1000];
 	int i;
 
 	i = 0;
 	fd = open("poeme.txt", O_RDONLY);
 	while (i++ < 100000)
-		get_next_line(line, fd);
+		get_next_line(fd, line);
 	
 	return (0);
 }
