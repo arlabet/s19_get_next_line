@@ -21,6 +21,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <limits.h>
 
 size_t	ft_strlen(const char *s);
 char		*ft_strcpy(char *dest, char *src);

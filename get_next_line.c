@@ -17,13 +17,12 @@ char	*read_line(char *str, int fd)
 	char		*buff;
 	int ret;
 	static int i;
-
-	ret = 1;
+	
 	if(!(buff = malloc(sizeof(char) * 2)))
 		return (0);
-	while (buff[0] != '\n' && i < BUFFER_SIZE && (ret > 0))
+	while (buff[0] != '\n' && i < BUFFER_SIZE && i < OPEN_MAX 
+		&& (ret = read(fd, buff, 1)) > 0)
 	{
-		ret = read(fd, buff, 1);
 		str = ft_strjoin(str, buff);
 		i++;
 	}
@@ -51,8 +50,11 @@ int		main(void)
 
 	i = 0;
 	fd = open("poeme.txt", O_RDONLY);
-	while (i++ < 100000)
+	while (i < BUFFER_SIZE && i < OPEN_MAX)
+	{
 		get_next_line(fd, line);
+		i++;
+	}
 	
 	return (0);
 }
