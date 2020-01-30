@@ -12,6 +12,7 @@
 
 #include "get_next_line.h"
 
+
 char	*read_line(char *str, int fd)
 {
 	char		*buff;
@@ -19,13 +20,16 @@ char	*read_line(char *str, int fd)
 	static int i;
 	
 	if(!(buff = malloc(sizeof(char) * 2)))
-		return (0);
+		free(buff);
+		
 	while (buff[0] != '\n' && i < BUFFER_SIZE && i < OPEN_MAX 
 		&& (ret = read(fd, buff, 1)) > 0)
 	{
 		str = ft_strjoin(str, buff);
 		i++;
 	}
+	if (ret < 0)
+		return(0);
 	return (str);
 }
 
@@ -33,16 +37,23 @@ int get_next_line(int fd, char **line)
 {
 	char *str;
 	if(!(str = malloc(sizeof(char) * BUFFER_SIZE + 1)))
-		return (0);
+	{
+		free(str);
+		return (-1);
+	}
 	if(!(*line = malloc(sizeof(char) * BUFFER_SIZE + 1)))
-		return (0);
+	{
+		free(*line);
+		return (-1);
+	}
 	str = read_line(str, fd);
 	ft_strcpy(*line, str);
-	printf("%s", *line);
-	return (1);
+	if (str[strlen(str) - 1] == '\n')
+		return (1);
+	return(0);
 }
 
-int		main(void)
+/*int		main(void)
 {
 	int		fd;
 	char *line[1000];
@@ -50,11 +61,13 @@ int		main(void)
 
 	i = 0;
 	fd = open("poeme.txt", O_RDONLY);
-	while (i < BUFFER_SIZE && i < OPEN_MAX)
-	{
-		get_next_line(fd, line);
-		i++;
-	}
-	
+		printf("%d\n", get_next_line(fd, line));
+		printf("%s\n", *line);	
+		printf("%d\n", get_next_line(fd, line));	
+		printf("%s\n", *line);	
+		printf("%d\n", get_next_line(fd, line));
+		printf("%s\n", *line);	
+		printf("%d\n", get_next_line(fd, line));
+		printf("%s\n", *line);
 	return (0);
-}
+}*/

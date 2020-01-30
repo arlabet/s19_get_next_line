@@ -29,7 +29,7 @@ char		*ft_strcpy(char *dest, char *src)
 	int i;
 
 	i = 0;
-	while (src[i])
+	while (src[i] && src[i] != '\n')
 	{
 		dest[i] = src[i];
 		i++;
