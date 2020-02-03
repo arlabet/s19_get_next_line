@@ -15,11 +15,10 @@
 int	get_next_line(int const fd, char **line)
 {
 	char *buff;
-	*line = "";
 	if (!(buff = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return(0);
 	read(fd, buff, BUFFER_SIZE);
-	*line = ft_strjoin(*line, buff);
+	*line = ft_strdup(buff, *line);
 	printf("%s", *line);
 	return (1);
 }

@@ -24,18 +24,22 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-int 	strchrn(char *str)
+char	*ft_strdup(char *src, char *dest)
 {
-	int i;
+	int		i;
 
+	if (!src)
+		return (NULL);
+	if (!(dest = malloc((sizeof(char) * ft_strlen(src)) + 1)))
+		return (NULL);
 	i = 0;
-	while(str[i])
+	while (src[i])
 	{
-		if (str[i] == '\n')
-			return(1);
+		dest[i] = src[i];
 		i++;
 	}
-	return(0);
+	dest[i] = '\0';
+	return (dest);
 }
 
 char		*ft_strcpyn(char *dest, char *src)

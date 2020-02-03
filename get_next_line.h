@@ -28,6 +28,7 @@ char *ft_strjoin(char const *s1, char const *s2);
 char		*ft_strcpyn(char *dest, char *src);
 char		*ft_strcat(char *dest, char *src);
 size_t	ft_strlen(const char *s);
+char	*ft_strdup(char *src, char *dest);
 
 
 # ifndef BUFFER_SIZE
