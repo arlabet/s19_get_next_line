@@ -23,10 +23,11 @@
 # include <unistd.h>
 # include <limits.h>
 
-size_t	ft_strlen(const char *s);
-char		*ft_strcpy(char *dest, char *src);
+int strchrn(char *str);
+char *ft_strjoin(char const *s1, char const *s2);
+char		*ft_strcpyn(char *dest, char *src);
 char		*ft_strcat(char *dest, char *src);
-char			*ft_strjoin(char *s1, char *s2);
+size_t	ft_strlen(const char *s);
 
 
 # ifndef BUFFER_SIZE

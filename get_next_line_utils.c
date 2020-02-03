@@ -24,7 +24,21 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char		*ft_strcpy(char *dest, char *src)
+int 	strchrn(char *str)
+{
+	int i;
+
+	i = 0;
+	while(str[i])
+	{
+		if (str[i] == '\n')
+			return(1);
+		i++;
+	}
+	return(0);
+}
+
+char		*ft_strcpyn(char *dest, char *src)
 {
 	int i;
 
@@ -38,7 +52,7 @@ char		*ft_strcpy(char *dest, char *src)
 	return (dest);
 }
 
-char		*ft_strcat(char *dest, char *src)
+char		*ft_strcatn(char *dest, char *src)
 {
 	int i;
 	int j;
@@ -47,7 +61,7 @@ char		*ft_strcat(char *dest, char *src)
 	j = 0;
 	while (dest[i])
 		i++;
-	while (src[j])
+	while (src[j] && src[j] != '\n')
 	{
 		dest[i] = src[j];
 		i++;
@@ -57,15 +71,15 @@ char		*ft_strcat(char *dest, char *src)
 	return (dest);
 }
 
-char			*ft_strjoin(char *s1, char *s2)
+char			*ft_strjoin(char const *s1, char const *s2)
 {
 	char *res;
-    
+
 	if (!s1 || !s2)
 		return (NULL);
 	if (!(res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
 		return (0);
-	ft_strcpy(res, (char *)s1);
-	ft_strcat(res, (char *)s2);
+	ft_strcpyn(res, (char *)s1);
+	ft_strcatn(res, (char *)s2);
 	return (res);
 }
