@@ -6,7 +6,7 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:57:35 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/01/29 17:02:50 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/03 18:54:35 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,39 +24,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strdup(char *src, char *dest)
-{
-	int		i;
-
-	if (!src)
-		return (NULL);
-	if (!(dest = malloc((sizeof(char) * ft_strlen(src)) + 1)))
-		return (NULL);
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char		*ft_strcpyn(char *dest, char *src)
-{
-	int i;
-
-	i = 0;
-	while (src[i] && src[i] != '\n')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char		*ft_strcatn(char *dest, char *src)
+static char		*ft_strcat_n(char *dest, char *src)
 {
 	int i;
 	int j;
@@ -83,7 +51,25 @@ char			*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	if (!(res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
 		return (0);
-	ft_strcpyn(res, (char *)s1);
-	ft_strcatn(res, (char *)s2);
+	ft_strcat_n(res, (char *)s1);
+	ft_strcat_n(res, (char *)s2);
 	return (res);
+}
+
+char	*ft_strdup(char *src, char *dest)
+{
+	int		i;
+
+	if (!src)
+		return (NULL);
+	if (!(dest = malloc((sizeof(char) * ft_strlen(src)) + 1)))
+		return (NULL);
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }
