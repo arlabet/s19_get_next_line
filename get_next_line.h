@@ -6,7 +6,7 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 20:04:33 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/01/29 14:40:00 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/04 19:16:54 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,10 @@
 # include <unistd.h>
 # include <limits.h>
 
-int strchrn(char *str);
-char *ft_strjoin(char const *s1, char const *s2);
-char		*ft_strcpyn(char *dest, char *src);
+char		*ft_strcpy(char *dest, char *src);
 char		*ft_strcat(char *dest, char *src);
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(char *src, char *dest);
-
+char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 12

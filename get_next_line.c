@@ -6,56 +6,83 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/03 21:16:37 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/04 20:19:41 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_read_file(int fd)
+char	*read_file(char *str, int fd)
 {
 	char	*buff;
-	int		rt;
-
-	if (!(buff = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-		return (0);
-	rt = read(fd, buff, BUFFER_SIZE);
-	buff[rt] = '\0';
-	return (buff);
-}
-
-int		ft_check_n(int fd)
-{
-	char	*str;
-	char	*rest;
-	char 	*line;
+	int		ret;
 	int		i;
-	int 	j;
 
 	i = 0;
-	str = ft_read_file(fd);
-	while (str[i] != '\n')
-
-		i++;
-	if (str[i] == '\n')
+	if (!(buff = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+		return (NULL);
+	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
 	{
-		if(!(rest = malloc(sizeof(char) * (BUFFER_SIZE - i + 1))))
-			return (0);
-		j = 0;
-		while(str[i])
-			str[j + i] = rest[j];
-			j++;
+		buff[ret] = '\0';
+		str = ft_strjoin(str, buff);
+		while (str[i])
+		{
+			if (str[i] == '\n')
+				return (str);
+			i++;
+		}
 	}
-	else if (str[i] == '\0')
-		if (i < BUFFER_SIZE)
+	return (str);
+}
+
+int		get_next_line(int fd, char **line)
+{
+	static char	*str;
+	int			i;
+
+	i = 0;
+	if (str == NULL)
+		str = "";
+	str = read_file(str, fd);
+	while (str[i] != '\n' && str[i])
+		i++;
+	if (str[i])
+	{
+		if (i == 0)
+		{
+			if (!(*line = malloc(sizeof(char) * 1)))
+				return (0);
+			*line = "";
+			return (1);
+		}
+		else
+		{
+			if (!(*line = malloc(sizeof(char) * (i + 1))))
+				return (0);
+			*line = ft_substr(str, 0, i);
+			str = &str[i + 1];
+			return (1);
+		}
+	}
+	else
+	{
+		if (!(*line = malloc(sizeof(char) * 1)))
+			return (0);
+		*line = "";
+	}
+	return (0);
 }
 
 int	main(void)
 {
-	int		fd;
-	char *str;
-	str = "";
+	int fd;
+	char *line;
+
 	fd = open("poeme.txt", O_RDONLY);
-	ft_check_n(fd, str);
+	while (get_next_line(fd, &line) == 1)
+	{
+		printf("%d\n", get_next_line(fd, &line));
+		printf("%s\n", line);
+	}
 	return (0);
 }
