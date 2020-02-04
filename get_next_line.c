@@ -6,7 +6,7 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/04 20:45:45 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/04 20:57:15 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,21 +72,10 @@ int	main(void)
 	char *line;
 
 	fd = open("poeme.txt", O_RDONLY);
-		printf("%d\n", get_next_line(fd, &line));
+	while (get_next_line(fd, &line) != 0)
+	{
 		printf("%s\n", line);
-		printf("%d\n", get_next_line(fd, &line));
-		printf("%s\n", line);
-		printf("%d\n", get_next_line(fd, &line));
-		printf("%s\n", line);
-		printf("%d\n", get_next_line(fd, &line));
-		printf("%s\n", line);
-		printf("%d\n", get_next_line(fd, &line));
-		printf("%s\n", line);
-		printf("%d\n", get_next_line(fd, &line));
-		printf("%s\n", line);
-		printf("%d\n", get_next_line(fd, &line));
-		printf("%s\n", line);
-		printf("%d\n", get_next_line(fd, &line));
-		printf("%s\n", line);
+	}
+	printf("%s\n", line);
 	return (0);
 }
