@@ -6,7 +6,7 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/04 20:19:41 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/04 20:45:45 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ char	*read_file(char *str, int fd)
 		}
 	}
 	return (str);
+	free(buff);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char	*str;
 	int			i;
@@ -46,31 +47,23 @@ int		get_next_line(int fd, char **line)
 	str = read_file(str, fd);
 	while (str[i] != '\n' && str[i])
 		i++;
-	if (str[i])
+	if (str[i] == '\n')
 	{
-		if (i == 0)
-		{
-			if (!(*line = malloc(sizeof(char) * 1)))
-				return (0);
-			*line = "";
-			return (1);
-		}
-		else
-		{
-			if (!(*line = malloc(sizeof(char) * (i + 1))))
-				return (0);
-			*line = ft_substr(str, 0, i);
-			str = &str[i + 1];
-			return (1);
-		}
+		if (!(*line = malloc(sizeof(char) * (i + 1))))
+			return (-1);
+		*line = ft_substr(str, 0, i);
+		str = &str[i + 1];
+		return (1);
 	}
-	else
+	else if (str[i] == '\0')
 	{
-		if (!(*line = malloc(sizeof(char) * 1)))
-			return (0);
-		*line = "";
+		if (!(*line = malloc(sizeof(char) * (i + 1))))
+			return (-1);
+		*line = ft_substr(str, 0, i);
+		str = &str[i + 1];
+		return (0);
 	}
-	return (0);
+	return (-1);
 }
 
 int	main(void)
@@ -79,10 +72,21 @@ int	main(void)
 	char *line;
 
 	fd = open("poeme.txt", O_RDONLY);
-	while (get_next_line(fd, &line) == 1)
-	{
 		printf("%d\n", get_next_line(fd, &line));
 		printf("%s\n", line);
-	}
+		printf("%d\n", get_next_line(fd, &line));
+		printf("%s\n", line);
+		printf("%d\n", get_next_line(fd, &line));
+		printf("%s\n", line);
+		printf("%d\n", get_next_line(fd, &line));
+		printf("%s\n", line);
+		printf("%d\n", get_next_line(fd, &line));
+		printf("%s\n", line);
+		printf("%d\n", get_next_line(fd, &line));
+		printf("%s\n", line);
+		printf("%d\n", get_next_line(fd, &line));
+		printf("%s\n", line);
+		printf("%d\n", get_next_line(fd, &line));
+		printf("%s\n", line);
 	return (0);
 }
