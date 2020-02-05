@@ -18,12 +18,14 @@ char	*read_file(char *str, int fd)
 	char	buff[BUFFER_SIZE + 1];
 	int		ret;
 	int		i;
-
+	char	*tmp;
 	i = 0;
 	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
 	{
 		buff[ret] = '\0';
-		str = ft_strjoin(str, buff);
+		tmp = str;
+		str = ft_strjoin(tmp, buff);
+		free(tmp);
 		while (str[i])
 		{
 			if (str[i] == '\n')
@@ -40,6 +42,7 @@ int	get_next_line(int fd, char **line)
 	static char	*str[OPEN_MAX];
 	int			i;
 	char tmp[BUFFER_SIZE + 1];
+	char	*tmpstr;
 
 	i = 0;
 	if (BUFFER_SIZE <= 0 || !fd || read(fd, tmp, 0))
@@ -56,7 +59,9 @@ int	get_next_line(int fd, char **line)
 	if (str[fd][i] == '\n')
 	{
 		*line = ft_substr(str[fd], 0, i);
-		str[fd] = ft_substr(str[fd], i + 1, ft_strlen(str[fd]));
+		tmpstr = str[fd];
+		str[fd] = ft_substr(tmpstr, i + 1, ft_strlen(tmpstr));
+		free(tmpstr);
 		return (1);
 	}
 	else if (str[fd][i] == '\0')
@@ -68,21 +73,3 @@ int	get_next_line(int fd, char **line)
 	}
 	return (-1);
 }
-
-/*
-int main (void)
-{
-	int fd;
-	char *line;
-	
-	fd = open("poeme.txt", O_RDONLY);
-	
-	while (get_next_line(fd, &line) != 0)
-	{
-		printf("%s\n", line);
-	}
-	printf("%s\n", line);
-	print_leaks();
-	return (0);
-}
-*/

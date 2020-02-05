@@ -22,13 +22,13 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <limits.h>
-# include "leak_detector.h"
+//# include "leak_detector.h"
 
 
 char		*ft_strcpy(char *dest, char *src);
 char		*ft_strcat(char *dest, char *src);
 char		*ft_strjoin(char const *s1, char const *s2);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_substr(char *s, unsigned int start, size_t len);
 int         get_next_line(int fd, char **line);
 size_t      ft_strlen(const char *s);
 char        *read_file(char *str, int fd);

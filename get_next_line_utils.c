@@ -85,11 +85,10 @@ char		*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	res[i] = '\0';
-	free((char*)s1);
 	return (res);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char	*res;
 	size_t	r;
