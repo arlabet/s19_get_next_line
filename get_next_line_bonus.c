@@ -6,13 +6,11 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/05 18:22:29 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/05 19:08:18 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-
 
 char	*read_file(char *str, int fd)
 {
@@ -35,12 +33,12 @@ char	*read_file(char *str, int fd)
 	return (str);
 }
 
-int	get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
 	static char	*str[OPEN_MAX];
 	int			i;
-	char tmp[BUFFER_SIZE + 1];
-	
+	char		tmp[BUFFER_SIZE + 1];
+
 	i = 0;
 	if (BUFFER_SIZE <= 0 || !fd || read(fd, tmp, 0))
 		return (-1);
@@ -49,7 +47,7 @@ int	get_next_line(int fd, char **line)
 	if (str[fd] == NULL)
 	{
 		*line = ft_strdup("");
-		return(0);
+		return (0);
 	}
 	while (str[fd][i] && str[fd][i] != '\n')
 		i++;

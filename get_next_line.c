@@ -6,12 +6,11 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/05 18:17:59 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/05 20:03:54 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
 
 
 char	*read_file(char *str, int fd)
@@ -35,12 +34,13 @@ char	*read_file(char *str, int fd)
 	return (str);
 }
 
+
 int	get_next_line(int fd, char **line)
 {
 	static char	*str[OPEN_MAX];
 	int			i;
 	char tmp[BUFFER_SIZE + 1];
-	
+
 	i = 0;
 	if (BUFFER_SIZE <= 0 || !fd || read(fd, tmp, 0))
 		return (-1);
@@ -62,8 +62,8 @@ int	get_next_line(int fd, char **line)
 	else if (str[fd][i] == '\0')
 	{
 		*line = ft_substr(str[fd], 0, i);
-		str[fd] = NULL;
 		free(str[fd]);
+		str[fd] = NULL;
 		return (0);
 	}
 	return (-1);
@@ -82,6 +82,7 @@ int main (void)
 		printf("%s\n", line);
 	}
 	printf("%s\n", line);
+	print_leaks();
 	return (0);
 }
 */
