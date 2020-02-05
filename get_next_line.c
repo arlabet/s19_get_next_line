@@ -6,48 +6,28 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/04 20:57:15 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/05 17:57:08 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strdup(const char *src)
-{
-	char	*dest;
-	int		i;
-	if (!src)
-		return (NULL);
-	if (!(dest = malloc((sizeof(char) * ft_strlen(src)) + 1)))
-	{
-		free(dest);
-		return (NULL);
-	}
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
+
 
 char	*read_file(char *str, int fd)
 {
-	char	*buff;
+	char	buff[BUFFER_SIZE + 1];
 	int		ret;
 	int		i;
+	char	*temp;
 
 	i = 0;
-	if (str == NULL)
-		str = ft_strdup("");
-	if (!(buff = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-		return (NULL);
 	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
 	{
 		buff[ret] = '\0';
-		str = ft_strjoin(str, buff);
+		temp = str;
+		str = ft_strjoin(temp, buff);
+		free(temp);
 		while (str[i])
 		{
 			if (str[i] == '\n')
@@ -55,7 +35,6 @@ char	*read_file(char *str, int fd)
 			i++;
 		}
 	}
-	free(buff);
 	return (str);
 }
 
@@ -63,24 +42,46 @@ int	get_next_line(int fd, char **line)
 {
 	static char	*str;
 	int			i;
-
+	char 		*tmp;
+	
 	i = 0;
 	if (BUFFER_SIZE <= 0 || !fd)
 		return (-1);
-	str = read_file(str, fd);
+	if (str == NULL || strchrn(str) == 0)
+		str = read_file(str, fd);
+	if (str == NULL)
+	{
+		*line = ft_strdup("");
+		return(0);
+	}
 	while (str[i] && str[i] != '\n')
 		i++;
 	if (str[i] == '\n')
 	{
 		*line = ft_substr(str, 0, i);
-		str = &str[i + 1];
+		tmp = str;
+		str = ft_substr(tmp, i + 1, ft_strlen(tmp));
+		free(tmp);
 		return (1);
 	}
 	else if (str[i] == '\0')
 	{
 		*line = ft_substr(str, 0, i);
-		str = &str[i];
+		free(str);
 		return (0);
 	}
-	return(-1);
+	return (-1);
+}
+
+int main (void)
+{
+	int fd;
+	char *line;
+	fd = open("poeme.txt", O_RDONLY);
+	while (get_next_line(fd, &line) != 0)
+	{
+		printf("%s\n", line);
+	}
+	printf("%s\n", line);
+	return (0);
 }

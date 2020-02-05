@@ -6,11 +6,25 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:57:35 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/04 19:35:09 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/05 15:56:19 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int	strchrn(char *str)
+{
+	int i;
+
+	i = 0;
+	while(str[i])
+	{
+		if (str[i] == '\n')
+			return(1);
+		i++;
+	}
+	return(0);
+}
 
 size_t		ft_strlen(const char *s)
 {
@@ -24,10 +38,15 @@ size_t		ft_strlen(const char *s)
 	return (i);
 }
 
-char		*ft_strcpy(char *dest, char *src)
+char	*ft_strdup(const char *src)
 {
-	int i;
+	char	*dest;
+	int		i;
 
+	if (!src)
+		return (NULL);
+	if (!(dest = malloc((sizeof(char) * ft_strlen(src)) + 1)))
+		return (NULL);
 	i = 0;
 	while (src[i])
 	{
@@ -38,37 +57,33 @@ char		*ft_strcpy(char *dest, char *src)
 	return (dest);
 }
 
-char		*ft_strcat(char *dest, char *src)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (dest[i])
-		i++;
-	while (src[j])
-	{
-		dest[i] = src[j];
-		i++;
-		j++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
 char		*ft_strjoin(char const *s1, char const *s2)
 {
 	char *res;
+	int i;
+	int j;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
+	if (!s1)
+		return(ft_strdup(s2));
 	if (!(res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
-	{
 		return (0);
+	
+	i = 0;
+	while (s1[i])
+	{
+		res[i] = s1[i];
+		i++;
 	}
-	ft_strcpy(res, (char *)s1);
-	ft_strcat(res, (char *)s2);
+	j = 0;
+	while(s2[j])
+	{
+		res[i] = s2[j];
+		i++;
+		j++;
+	}
+	res[i] = '\0';
 	return (res);
 }
 
