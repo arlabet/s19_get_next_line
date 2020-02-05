@@ -6,7 +6,7 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:57:35 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/05 18:06:11 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/05 19:48:17 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char		*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	if (!s1)
 		return(ft_strdup(s2));
+	
 	if (!(res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
 		return (0);
 	
@@ -84,11 +85,10 @@ char		*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	res[i] = '\0';
-	free((char*)s1);
 	return (res);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char	*res;
 	size_t	r;

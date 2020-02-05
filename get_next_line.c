@@ -36,16 +36,23 @@ char	*read_file(char *str, int fd)
 	return (str);
 }
 
+int until_n(char *str)
+{
+	int i;
+	
+	i = 0;
+	while(str[i] && str[i] != '\n')
+		i++;
+	return (i);
+}
 
 int	get_next_line(int fd, char **line)
 {
 	static char	*str[OPEN_MAX];
 	int			i;
-	char tmp[BUFFER_SIZE + 1];
 	char	*tmpstr;
 
-	i = 0;
-	if (BUFFER_SIZE <= 0 || !fd || read(fd, tmp, 0))
+	if (BUFFER_SIZE <= 0 || !fd || read(fd, str[fd], 0) == - 1)
 		return (-1);
 	if (str[fd] == NULL || strchrn(str[fd]) == 0)
 		str[fd] = read_file(str[fd], fd);
@@ -54,11 +61,10 @@ int	get_next_line(int fd, char **line)
 		*line = ft_strdup("");
 		return(0);
 	}
-	while (str[fd][i] && str[fd][i] != '\n')
-		i++;
+	i = until_n(str[fd]);
+	*line = ft_substr(str[fd], 0, i);
 	if (str[fd][i] == '\n')
 	{
-		*line = ft_substr(str[fd], 0, i);
 		tmpstr = str[fd];
 		str[fd] = ft_substr(tmpstr, i + 1, ft_strlen(tmpstr));
 		free(tmpstr);
@@ -66,7 +72,6 @@ int	get_next_line(int fd, char **line)
 	}
 	else if (str[fd][i] == '\0')
 	{
-		*line = ft_substr(str[fd], 0, i);
 		free(str[fd]);
 		str[fd] = NULL;
 		return (0);
