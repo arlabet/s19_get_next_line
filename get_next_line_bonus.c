@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/05 18:17:59 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/05 18:22:29 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,26 +62,9 @@ int	get_next_line(int fd, char **line)
 	else if (str[fd][i] == '\0')
 	{
 		*line = ft_substr(str[fd], 0, i);
-		str[fd] = NULL;
 		free(str[fd]);
+		str[fd] = NULL;
 		return (0);
 	}
 	return (-1);
 }
-
-/*
-int main (void)
-{
-	int fd;
-	char *line;
-	
-	fd = open("poeme.txt", O_RDONLY);
-	
-	while (get_next_line(fd, &line) != 0)
-	{
-		printf("%s\n", line);
-	}
-	printf("%s\n", line);
-	return (0);
-}
-*/
