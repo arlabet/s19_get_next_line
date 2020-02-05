@@ -22,7 +22,6 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <limits.h>
-//# include "leak_detector.h"
 
 
 char		*ft_strcpy(char *dest, char *src);
