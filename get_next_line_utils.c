@@ -64,7 +64,10 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	if (!s1 || !s2)
 		return (NULL);
 	if (!(res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
+	{
+		free(res);
 		return (0);
+	}
 	ft_strcpy(res, (char *)s1);
 	ft_strcat(res, (char *)s2);
 	return (res);
@@ -83,7 +86,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (len + start > ft_strlen(s) && start < ft_strlen(s))
 		len = (ft_strlen(s) - start);
 	if (!(res = malloc(sizeof(char) * (len + 1))))
+	{
+		free(res);
 		return (0);
+	}
 	while (r < len)
 	{
 		res[r] = s[start];
