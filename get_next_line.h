@@ -6,7 +6,7 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 20:04:33 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/06 15:15:49 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/06 19:51:06 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include "get_next_line.h"
 # include <unistd.h>
 # include <limits.h>
 

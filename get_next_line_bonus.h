@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/06 18:40:13 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/06 18:41:10 by nsahloum         ###   ########.fr       */
+/*   Created: 2020/01/26 20:04:33 by nsahloum          #+#    #+#             */
+/*   Updated: 2020/02/06 19:50:29 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include "get_next_line.h"
 # include <unistd.h>
 # include <limits.h>
 
