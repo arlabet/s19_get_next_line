@@ -50,7 +50,7 @@ int	get_next_line(int fd, char **line)
 {
 	static char	*str[OPEN_MAX];
 	int			i;
-	char	*tmpstr;
+	char	*tmp;
 
 	if (BUFFER_SIZE <= 0 || !fd || read(fd, str[fd], 0) == - 1)
 		return (-1);
@@ -63,18 +63,14 @@ int	get_next_line(int fd, char **line)
 	}
 	i = until_n(str[fd]);
 	*line = ft_substr(str[fd], 0, i);
-	if (str[fd][i] == '\n')
+	if (str[fd] != NULL && str[fd][i] == '\n')
 	{
-		tmpstr = str[fd];
-		str[fd] = ft_substr(tmpstr, i + 1, ft_strlen(tmpstr));
-		free(tmpstr);
+		tmp = str[fd];
+		str[fd] = ft_substr(tmp, i + 1, ft_strlen(tmp));
+		free(tmp);
 		return (1);
 	}
-	else if (str[fd][i] == '\0')
-	{
-		free(str[fd]);
-		str[fd] = NULL;
-		return (0);
-	}
-	return (-1);
+	free(str[fd]);
+	str[fd] = NULL;
+	return (0);
 }
