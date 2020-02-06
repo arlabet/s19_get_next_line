@@ -6,21 +6,19 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 20:04:33 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/06 19:51:06 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/06 19:56:37 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
+# include <limits.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-# include <unistd.h>
-# include <limits.h>
 
 char		*ft_strcpy(char *dest, char *src);
 char		*ft_strcat(char *dest, char *src);
