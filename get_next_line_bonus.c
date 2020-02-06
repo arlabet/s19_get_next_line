@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/05 20:03:54 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/06 14:41:42 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
+#include "get_next_line_bonus.h"
 
 char	*read_file(char *str, int fd)
 {
@@ -19,6 +18,7 @@ char	*read_file(char *str, int fd)
 	int		ret;
 	int		i;
 	char	*tmp;
+
 	i = 0;
 	while ((ret = read(fd, buff, BUFFER_SIZE)) > 0)
 	{
@@ -36,38 +36,41 @@ char	*read_file(char *str, int fd)
 	return (str);
 }
 
-int	get_next_line(int fd, char **line)
+int		until_n(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	return (i);
+}
+
+int		get_next_line(int fd, char **line)
 {
 	static char	*str[OPEN_MAX];
 	int			i;
-	//char tmp[BUFFER_SIZE + 1];
-	char	*tmpstr;
+	char		*tmp;
 
-	i = 0;
-	if (BUFFER_SIZE <= 0 || !fd || read(fd, str[fd], 0) == - 1)
+	if (BUFFER_SIZE <= 0 || !fd || read(fd, str[fd], 0) == -1)
 		return (-1);
 	if (str[fd] == NULL || strchrn(str[fd]) == 0)
 		str[fd] = read_file(str[fd], fd);
 	if (str[fd] == NULL)
 	{
 		*line = ft_strdup("");
-		return(0);
-	}
-	while (str[fd][i] && str[fd][i] != '\n')
-		i++;
-	*line = ft_substr(str[fd], 0, i);
-	if (str[fd][i] == '\n')
-	{
-		tmpstr = str[fd];
-		str[fd] = ft_substr(tmpstr, i + 1, ft_strlen(tmpstr));
-		free(tmpstr);
-		return (1);
-	}
-	else if (str[fd][i] == '\0')
-	{
-		free(str[fd]);
-		str[fd] = NULL;
 		return (0);
 	}
-	return (-1);
+	i = until_n(str[fd]);
+	*line = ft_substr(str[fd], 0, i);
+	if (str[fd] != NULL && str[fd][i] == '\n')
+	{
+		tmp = str[fd];
+		str[fd] = ft_substr(tmp, i + 1, ft_strlen(tmp));
+		free(tmp);
+		return (1);
+	}
+	free(str[fd]);
+	str[fd] = NULL;
+	return (0);
 }

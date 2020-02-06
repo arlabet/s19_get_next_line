@@ -1,12 +1,11 @@
 #include "get_next_line.h"
 
-int main (int argc, char **argv)
+int main (void)
 {
 	int fd;
 	char *line;
 	
-	fd = open(argv[1], O_RDONLY);
-	argc = 2;
+	fd = open("poeme.txt", O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
 		printf("%s\n", line);
@@ -15,6 +14,6 @@ int main (int argc, char **argv)
 	printf("%s\n", line);
 	free(line);
 	close(fd);
-	//print_leaks();
+	print_leaks();
 	return (0);
 }

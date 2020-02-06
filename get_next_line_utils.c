@@ -6,27 +6,27 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:57:35 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/05 19:48:17 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/06 14:45:04 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	strchrn(char *str)
+int		strchrn(char *str)
 {
 	int i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] == '\n')
-			return(1);
+			return (1);
 		i++;
 	}
-	return(0);
+	return (0);
 }
 
-size_t		ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t i;
 
@@ -57,20 +57,18 @@ char	*ft_strdup(const char *src)
 	return (dest);
 }
 
-char		*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char *res;
-	int i;
-	int j;
+	char	*res;
+	int		i;
+	int		j;
 
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
-		return(ft_strdup(s2));
-	
+		return (ft_strdup(s2));
 	if (!(res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
 		return (0);
-	
 	i = 0;
 	while (s1[i])
 	{
@@ -78,7 +76,7 @@ char		*ft_strjoin(char const *s1, char const *s2)
 		i++;
 	}
 	j = 0;
-	while(s2[j])
+	while (s2[j])
 	{
 		res[i] = s2[j];
 		i++;
