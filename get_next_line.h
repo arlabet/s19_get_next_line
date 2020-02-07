@@ -6,7 +6,7 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 20:04:33 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/06 19:56:37 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/07 16:58:25 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			strchrn(char *str);
 char		*ft_strdup(const char *src);
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 2
+#  define BUFFER_SIZE 12
 # endif
 
 #endif
