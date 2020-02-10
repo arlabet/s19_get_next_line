@@ -6,7 +6,7 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/07 17:00:17 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/10 02:55:42 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int		get_next_line(int fd, char **line)
 	int			i;
 	char		*tmp;
 
-	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, str[fd], 0) < 0 || !line)
+	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, str[fd], 0) < 0 || !line
+		|| fd >= OPEN_MAX)
 		return (-1);
 	if (str[fd] == NULL || strchrn(str[fd]) == 0)
 		str[fd] = read_file(str[fd], fd);
