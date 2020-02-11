@@ -6,13 +6,13 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 19:57:40 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/10 02:55:42 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/11 19:14:57 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*read_file(char *str, int fd)
+char	*ft_read_file(char *str, int fd)
 {
 	char	buff[BUFFER_SIZE + 1];
 	int		ret;
@@ -36,7 +36,7 @@ char	*read_file(char *str, int fd)
 	return (str);
 }
 
-int		until_n(char *str)
+int		ft_until_n(char *str)
 {
 	int i;
 
@@ -55,11 +55,11 @@ int		get_next_line(int fd, char **line)
 	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, str[fd], 0) < 0 || !line
 		|| fd >= OPEN_MAX)
 		return (-1);
-	if (str[fd] == NULL || strchrn(str[fd]) == 0)
-		str[fd] = read_file(str[fd], fd);
+	if (str[fd] == NULL || ft_strchrn(str[fd]) == 0)
+		str[fd] = ft_read_file(str[fd], fd);
 	if (str[fd] == NULL)
 		return (*line = ft_strdup("")) != NULL ? 0 : -1;
-	i = until_n(str[fd]);
+	i = ft_until_n(str[fd]);
 	*line = ft_substr(str[fd], 0, i);
 	if (str[fd] != NULL && str[fd][i] == '\n')
 	{

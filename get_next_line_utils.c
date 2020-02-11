@@ -6,13 +6,13 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 09:57:35 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/06 14:45:04 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/11 18:36:00 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		strchrn(char *str)
+int		ft_strchrn(char *str)
 {
 	int i;
 

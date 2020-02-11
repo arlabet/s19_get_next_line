@@ -6,7 +6,7 @@
 /*   By: nsahloum <nsahloum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 20:04:33 by nsahloum          #+#    #+#             */
-/*   Updated: 2020/02/07 16:58:22 by nsahloum         ###   ########.fr       */
+/*   Updated: 2020/02/11 18:35:49 by nsahloum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_substr(char *s, unsigned int start, size_t len);
 int			get_next_line(int fd, char **line);
 size_t		ft_strlen(const char *s);
-char		*read_file(char *str, int fd);
-int			strchrn(char *str);
+char		*ft_read_file(char *str, int fd);
+int			ft_strchrn(char *str);
 char		*ft_strdup(const char *src);
 
 # ifndef BUFFER_SIZE
